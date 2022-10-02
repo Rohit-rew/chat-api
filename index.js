@@ -1,12 +1,20 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const database = require("./database/scheema");
+const router = require("./routes/routes");
+const { urlencoded } = require("express");
+app.use(urlencoded({extended:false}))
+app.use(express.json())
 
-app.get("/", async (req, res) => {
-  const reqdata = await database.find({ username: "pinakin" });
-  res.status(200).json({ success: true, data: reqdata });
-});
+app.use("/api", router);
+
+
+
+
+
+
+
+//database and server
 
 const connectdb = require("./database/connect");
 let port = process.env.PORT;
